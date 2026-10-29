@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en-CA">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>A searchable dinosaur catalogue with a protected admin area | Tylon Sohnle</title>
+  <meta name="description" content="A four-person PHP/MySQL project: a searchable catalogue of dinosaur records, with a public gallery and a protected administration area.">
+  <link rel="canonical" href="https://tylonsohnle.com/project-studies-ember/dinobase.html">
+  <link rel="stylesheet" href="../css/minimal-foundation.css?v=accent1">
+  <link rel="stylesheet" href="../css/ember-study.css?v=standalone2">
+  <link rel="stylesheet" href="../css/ember-pages.css?v=standalone7">
+</head>
+
+<body class="ember-page ember-article-page">
+  <a class="skip" href="#content">Skip to content</a>
+
+  <aside class="sidebar">
+    <a class="site-name" href="../index.html">Tylon Sohnle</a>
+    <nav aria-label="Primary">
+      <a href="../index.html">Home</a>
+      <a href="../projects.html" aria-current="page">Projects</a>
+    </nav>
+    <a class="sidebar-contact" href="mailto:tysohnle@proton.me">Email me ↗</a>
+  </aside>
+
+  <main id="content" class="ember-detail ember-standalone">
+    <div class="ember-article">
+          <header class="ember-head">
+            <h1 class="ember-title">A searchable dinosaur catalogue with a protected admin area</h1>
+            <p class="ember-lede">A four-person PHP/MySQL project: a searchable catalogue of dinosaur records, with a public gallery and a protected administration area.</p>
+            <p class="ember-meta ember-byline"><span>The DinoBase</span></p>
+          </header>
+
+          <figure class="ember-shot">
+            <img src="../img/dinobase/landing.png" alt="DinoBase dinosaur catalogue landing page" width="668" height="962" loading="eager">
+          </figure>
+
+          <div class="ember-prose">
+            <h2 id="overview">One catalogue, two audiences</h2>
+            <p>The DinoBase serves two audiences — visitors who browse and search the collection, and the administrators who keep it accurate. Built by a team of four for a PHP/MySQL course, it runs as a complete Docker stack. I worked across the database and the PHP behind it: the schema, the search and pagination the gallery depends on, and the forms that write records back.</p>
+            <h2 id="what-it-does">What it does</h2>
+            <ul class="ember-features">
+              <li><strong>Search and filtering.</strong> Browse records by genus, species, era, size, weight and location, with paginated results.</li>
+              <li><strong>Protected administration.</strong> Administrators maintain the catalogue behind sessions and hashed passwords, with no public registration.</li>
+              <li><strong>Structured entries.</strong> Validated forms collect dinosaur details and images before saving records to the gallery.</li>
+              <li><strong>Shared data.</strong> A normalized MySQL schema supports the public gallery and administration area.</li>
+              <li><strong>A complete local stack.</strong> Docker packages PHP, Apache and MySQL so the application starts with a single command.</li>
+            </ul>
+            <p>The schema is normalized around what the catalogue actually contains — dinosaurs, administrators, favourites and profile images — so each record is stored once and read wherever it is needed. Search and filtering run across genus, species, era, size, weight and location, and the gallery paginates the results. Every query that takes user input goes through prepared statements, and the admin forms validate their fields before a record is written.</p>
+            <p>The public gallery and the administration area read the same data through different paths: one is open, the other sits behind a session and hashed passwords. Docker packages MySQL, PHP and Apache, so the whole application starts locally with a single command.</p>
+            <p class="ember-link"><a href="https://github.com/Tsohnle95/The-DinoBase">View the repository</a></p>
+          </div>
+
+          <footer class="ember-foot">
+            <a class="ember-back" href="../projects.html">Back to projects →</a>
+          </footer>
+        </div>
+  </main>
+
+  <aside class="toc">
+    <span>On this page</span>
+    <nav aria-label="On this page">
+      <a href="#overview">Overview</a>
+      <a href="#what-it-does">What it does</a>
+    </nav>
+  </aside>
+
+  <footer class="site-foot">
+    <span>Tylon Sohnle · Edmonton, Alberta</span>
+    <div class="keys"><a href="mailto:tysohnle@proton.me">Email</a><a href="https://github.com/Tsohnle95">GitHub</a></div>
+  </footer>
+
+  <script src="../js/toc.js" defer></script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en-CA">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>A framework-free chat app with replies that stream as they arrive | Tylon Sohnle</title>
+  <meta name="description" content="A framework-free chat app with streamed Ollama replies, saved conversation context and cancellable requests.">
+  <link rel="canonical" href="https://tylonsohnle.com/project-studies-ember/neptune.html">
+  <link rel="stylesheet" href="../css/minimal-foundation.css?v=accent1">
+  <link rel="stylesheet" href="../css/ember-study.css?v=standalone2">
+  <link rel="stylesheet" href="../css/ember-pages.css?v=standalone7">
+</head>
+
+<body class="ember-page ember-article-page">
+  <a class="skip" href="#content">Skip to content</a>
+
+  <aside class="sidebar">
+    <a class="site-name" href="../index.html">Tylon Sohnle</a>
+    <nav aria-label="Primary">
+      <a href="../index.html">Home</a>
+      <a href="../projects.html" aria-current="page">Projects</a>
+    </nav>
+    <a class="sidebar-contact" href="mailto:tysohnle@proton.me">Email me ↗</a>
+  </aside>
+
+  <main id="content" class="ember-detail ember-standalone">
+    <div class="ember-article">
+          <header class="ember-head">
+            <h1 class="ember-title">A framework-free chat app with replies that stream as they arrive</h1>
+            <p class="ember-lede">A framework-free chat app with streamed Ollama replies, saved conversation context and cancellable requests.</p>
+            <p class="ember-meta ember-byline"><span>Neptune AI Chatbot</span></p>
+          </header>
+
+          <figure class="ember-shot">
+            <img src="../img/updates-2026-10/main-chatbot.png" alt="Neptune chat interface with conversation history" width="3020" height="1668" loading="eager">
+          </figure>
+
+          <div class="ember-prose">
+            <h2 id="overview">A conversation with a reliable request lifecycle</h2>
+            <p>Neptune is a chat interface built against Ollama’s API, with no framework on the front end and a small Express service behind it. The work was less about the chat bubbles than the request lifecycle around them: replies stream in as they are generated, a response can be cancelled or timed out mid-stream, and the interface reports whether the backend is actually reachable.</p>
+            <h2 id="what-it-does">What it does</h2>
+            <ul class="ember-features">
+              <li><strong>Streamed replies.</strong> Fetch, a streamed reader and TextDecoder render Ollama responses as they arrive.</li>
+              <li><strong>Cancellation and timeouts.</strong> An AbortController ties stopping and timing out to each request.</li>
+              <li><strong>Saved context.</strong> Conversation context stays available between messages.</li>
+              <li><strong>Visible backend health.</strong> A heartbeat checks a health endpoint so the interface can report when the backend is unavailable.</li>
+              <li><strong>A compact mobile composer.</strong> Starting prompts, model controls and message actions remain within reach.</li>
+              <li><strong>Separated API responsibilities.</strong> Express routing, controllers, middleware and inference have clear boundaries.</li>
+            </ul>
+            <p>The Express backend separates routing, controllers, middleware and inference, so the parts that validate a request are not tangled with the parts that talk to the model. Replies stream to the browser through the Fetch API and a streamed reader, decoded with TextDecoder and rendered as they arrive rather than waiting for the full response.</p>
+            <p>An AbortController ties cancellation and timeouts to each request, and a heartbeat polls a health endpoint so the interface can show when the backend is unavailable instead of failing silently. The API is rate-limited per IP with proxy-aware client detection, validated input and an environment-configured CORS allowlist, and it logs requests with timing and user-agent data. The front end deploys on GitHub Pages and the API on Render.</p>
+            <p class="ember-link"><a href="https://tsohnle95.github.io/Neptune-AI-Chatbot/">Open the live demo</a></p>
+          </div>
+
+          <footer class="ember-foot">
+            <a class="ember-back" href="../projects.html">Back to projects →</a>
+          </footer>
+        </div>
+  </main>
+
+  <aside class="toc">
+    <span>On this page</span>
+    <nav aria-label="On this page">
+      <a href="#overview">Overview</a>
+      <a href="#what-it-does">What it does</a>
+    </nav>
+  </aside>
+
+  <footer class="site-foot">
+    <span>Tylon Sohnle · Edmonton, Alberta</span>
+    <div class="keys"><a href="mailto:tysohnle@proton.me">Email</a><a href="https://github.com/Tsohnle95">GitHub</a></div>
+  </footer>
+
+  <script src="../js/toc.js" defer></script>
+</body>
+
+</html>

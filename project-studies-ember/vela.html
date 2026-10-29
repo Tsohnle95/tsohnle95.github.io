@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en-CA">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>A desktop workspace for coding agents, edits and terminals | Tylon Sohnle</title>
+  <meta name="description" content="An Electron workspace that keeps coding agents, the editor, file changes and terminals in one window.">
+  <link rel="canonical" href="https://tylonsohnle.com/project-studies-ember/vela.html">
+  <link rel="stylesheet" href="../css/minimal-foundation.css?v=accent1">
+  <link rel="stylesheet" href="../css/ember-study.css?v=standalone4">
+  <link rel="stylesheet" href="../css/ember-pages.css?v=standalone7">
+</head>
+
+<body class="ember-page ember-article-page">
+  <a class="skip" href="#content">Skip to content</a>
+
+  <aside class="sidebar">
+    <a class="site-name" href="../index.html">Tylon Sohnle</a>
+    <nav aria-label="Primary">
+      <a href="../index.html">Home</a>
+      <a href="../projects.html" aria-current="page">Projects</a>
+    </nav>
+    <a class="sidebar-contact" href="mailto:tysohnle@proton.me">Email me ↗</a>
+  </aside>
+
+  <main id="content" class="ember-detail ember-standalone">
+    <div class="ember-article">
+          <header class="ember-head">
+            <h1 class="ember-title">A desktop workspace for coding agents, edits and terminals</h1>
+            <p class="ember-lede">An Electron workspace that keeps coding agents, the editor, file changes and terminals in one window.</p>
+            <p class="ember-meta ember-byline"><span>Vela</span><span aria-hidden="true">·</span><a href="../vela-product/index.html">Product page ↗</a></p>
+          </header>
+
+          <figure class="ember-shot">
+            <img src="../img/updates-2026-10/main-vela.png?v=3" alt="Vela workspace showing a repository, code editor and agent conversation" width="1499" height="880" loading="eager">
+          </figure>
+
+          <div class="ember-prose">
+            <h2 id="overview">The whole coding workflow in one window</h2>
+            <p>Running coding agents usually means juggling a terminal, an editor and a diff view. Vela puts them in a single desktop window: the agent’s streamed work on one side, the code it touches and the terminals it runs on the other. I built it end to end as a solo project — the Electron main process, the runtime adapters that talk to the agent, the React renderer, and the packaging.</p>
+            <h2 id="what-it-does">What it does</h2>
+            <ul class="ember-features">
+              <li><strong>Streamed agent work.</strong> Follow reasoning summaries, tool calls, subagents, todos and permission requests in one timeline.</li>
+              <li><strong>Parallel sessions.</strong> Resizable agent panels each keep their own project context, composer and model controls.</li>
+              <li><strong>Code review beside the agent.</strong> A Changes list opens edits and diffs in Monaco.</li>
+              <li><strong>An everyday editor.</strong> Autosave, Emmet and HTML/CSS validation support the editing workflow.</li>
+              <li><strong>Native process access.</strong> Electron manages agent runtimes, the filesystem and PTY terminals through a narrow preload API.</li>
+            </ul>
+            <p>Electron owns the parts that need native access — agent runtimes, the filesystem and PTY terminals — and exposes them to the renderer through a narrow preload API rather than handing over Node directly. The React renderer consumes that boundary and presents the agent’s streamed output, Monaco-powered edits and diffs, and live terminals side by side.</p>
+            <p>The timeline is the core of it: reasoning summaries, tool calls, subagents, todos and permission requests all stream into one view, so the agent’s work can be followed as it happens. A Changes list opens each edit in Monaco for review, while autosave, Emmet and HTML/CSS validation keep the editing side usable. It targets macOS first, with Linux and Windows coverage, and needs Node 22 plus a reachable opencode service.</p>
+            <p class="ember-link"><a href="https://github.com/Tsohnle95/Vela">View source on GitHub</a> <span class="link-sep" aria-hidden="true">·</span> <a href="../vela-product/index.html">Product page ↗</a></p>
+          </div>
+
+          <footer class="ember-foot">
+            <a class="ember-back" href="../projects.html">Back to projects →</a>
+          </footer>
+        </div>
+  </main>
+
+  <aside class="toc">
+    <span>On this page</span>
+    <nav aria-label="On this page">
+      <a href="#overview">Overview</a>
+      <a href="#what-it-does">What it does</a>
+    </nav>
+  </aside>
+
+  <footer class="site-foot">
+    <span>Tylon Sohnle · Edmonton, Alberta</span>
+    <div class="keys"><a href="mailto:tysohnle@proton.me">Email</a><a href="https://github.com/Tsohnle95">GitHub</a></div>
+  </footer>
+
+  <script src="../js/toc.js" defer></script>
+</body>
+
+</html>

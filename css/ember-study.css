@@ -1,0 +1,286 @@
+/* ==========================================================================
+   Ember case-study layout, integrated into the projects master/detail pane.
+   Used by projects-ember.html only.
+
+   Structure follows noemititarenco.com/projects/ember/: a centred ~820px
+   column, mono meta rows, a large display headline, a framed hero screenshot,
+   then prose with section headings and a feature list.
+
+   Typography and palette come from the portfolio: Cormorant Garamond for the
+   article, mono for labels and controls, graphite ground and cream ink.
+   ========================================================================== */
+
+.ember-detail {
+  --em-fg: #e9e3d6;
+  --em-muted: #a39c8b;
+  --em-line: #37352f;
+  --em-surface: #201f1b;
+  --em-brass: #cfcfcf;
+  --em-brass-soft: #ededed;
+  --em-gutter: clamp(20px, 4.4vw, 48px);
+
+  min-height: 100%;
+  color: var(--em-fg);
+  background: var(--bg);
+  font-family: var(--serif);
+}
+
+/* Keep the close control within reach while the article scrolls. */
+.ember-detail .study-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  justify-content: flex-end;
+  padding: 14px var(--em-gutter) 10px;
+  pointer-events: none;
+}
+
+.ember-detail .study-toolbar button {
+  min-height: 32px;
+  padding: 5px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(27, 26, 23, 0.82);
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  box-shadow: 0 0 0 1px var(--em-line);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: var(--em-muted);
+  font: 500 10px/1 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.ember-detail .study-toolbar button:hover {
+  color: var(--em-brass);
+  box-shadow: 0 0 0 1px var(--em-brass);
+}
+
+.ember-detail .study-toolbar button:focus-visible {
+  outline: 1px solid var(--em-brass);
+  outline-offset: 3px;
+}
+
+/* ---- centred reading column -------------------------------------------- */
+
+.ember-detail .ember-article {
+  width: min(820px, 100% - 2 * var(--em-gutter));
+  margin-inline: auto;
+  padding: 8px 0 72px;
+}
+
+/* ---- head --------------------------------------------------------------- */
+
+.ember-detail .ember-head {
+  min-width: 0;
+}
+
+.ember-detail .ember-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  margin: 0;
+  color: var(--em-muted);
+  font: 500 10px/1.6 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.ember-detail .ember-byline {
+  margin-top: 16px;
+  color: color-mix(in srgb, var(--em-fg) 52%, transparent);
+}
+
+.ember-detail .ember-meta a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.ember-detail .ember-meta a:hover {
+  color: var(--em-brass);
+}
+
+.ember-detail .ember-title {
+  margin: 14px 0 0;
+  color: var(--em-fg);
+  font-family: var(--serif);
+  font-size: clamp(44px, 6vw, 64px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  overflow-wrap: anywhere;
+}
+
+.ember-detail .ember-lede {
+  max-width: 66ch;
+  margin: 18px 0 0;
+  color: var(--em-fg);
+  font: 400 25px/1.5 var(--serif);
+}
+
+/* ---- framed hero screenshot -------------------------------------------- */
+
+.ember-detail .ember-shot {
+  width: fit-content;
+  max-width: 100%;
+  margin: 32px 0 0;
+  padding: 9px;
+  border-radius: 14px;
+  background: var(--em-surface);
+  box-shadow:
+    0 0 0 1px var(--em-line),
+    0 18px 48px rgba(0, 0, 0, 0.3);
+}
+
+.ember-detail .ember-shot img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 560px;
+  height: auto;
+  border-radius: 7px;
+  background: var(--bg-deep, #14130f);
+}
+
+/* ---- prose -------------------------------------------------------------- */
+
+.ember-detail .ember-prose {
+  margin-top: 34px;
+  color: var(--em-fg);
+  font: 400 20px/1.65 var(--serif);
+  overflow-wrap: anywhere;
+}
+
+.ember-detail .ember-prose > :first-child {
+  margin-top: 0;
+}
+
+.ember-detail .ember-prose h2,
+.ember-detail .ember-prose h3 {
+  margin: 1.7em 0 0.7em;
+  color: var(--em-fg);
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0;
+}
+
+.ember-detail .ember-prose p {
+  margin: 0 0 1.25em;
+}
+
+.ember-detail .ember-prose strong {
+  color: var(--em-fg);
+  font-weight: 600;
+}
+
+.ember-detail .ember-prose ul {
+  margin: 0 0 1.25em;
+  padding-left: 1.35em;
+  list-style: disc;
+}
+
+.ember-detail .ember-prose li {
+  margin: 0.5em 0;
+  padding-left: 0.15em;
+}
+
+.ember-detail .ember-prose li::marker {
+  color: var(--em-brass);
+}
+
+.ember-detail .ember-prose a {
+  color: var(--em-brass);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.ember-detail .ember-prose a:hover {
+  color: var(--em-brass-soft);
+}
+
+.ember-detail .ember-link {
+  margin-top: 1.6em;
+}
+
+.ember-detail .link-sep {
+  margin: 0 0.35em;
+  color: var(--em-muted);
+}
+
+/* ---- footer ------------------------------------------------------------- */
+
+.ember-detail .ember-foot {
+  margin-top: 44px;
+  padding-top: 18px;
+}
+
+.ember-detail .ember-back {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--em-fg);
+  font: 500 12px/1 var(--mono);
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: color 0.18s ease;
+}
+
+.ember-detail .ember-back:hover {
+  color: var(--em-brass);
+}
+
+.ember-detail .ember-back:focus-visible {
+  outline: 1px solid var(--em-brass);
+  outline-offset: 4px;
+}
+
+/* ---- phone -------------------------------------------------------------- */
+
+@media (max-width: 860px) {
+  .ember-detail .study-toolbar {
+    padding: 12px 20px 8px;
+  }
+
+  .ember-detail .ember-article {
+    width: calc(100% - 40px);
+    padding: 6px 0 64px;
+  }
+
+  .ember-detail .ember-title {
+    font-size: clamp(36px, 9.5vw, 48px);
+  }
+
+  .ember-detail .ember-lede {
+    font-size: 20px;
+    line-height: 1.5;
+  }
+
+  .ember-detail .ember-shot {
+    margin-top: 26px;
+    padding: 6px;
+    border-radius: 12px;
+  }
+
+  .ember-detail .ember-prose {
+    margin-top: 28px;
+    font-size: 18px;
+    line-height: 1.65;
+  }
+
+  .ember-detail .ember-prose h3 {
+    font-size: 22px;
+  }
+}

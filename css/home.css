@@ -1,0 +1,865 @@
+
+
+@font-face {
+  font-family: Flex;
+  src: url("../img/fonts/roboto-flex.ttf") format("truetype");
+  font-weight: 100 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg: #1b1a17;
+  --bg2: #201f1b;
+  --fg: #e9e3d6;
+  --muted: #a39c8b;
+  --faint: #6d675b;
+  --line: #37352f;
+  --rule: #292723;
+  --brass: #cfcfcf;
+  --brass-dim: #777777;
+  --rubric: #b06a4e;
+  --ink: #131210;
+  --serif: Georgia, "Iowan Old Style", "Times New Roman", serif;
+  --sans: Flex, Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 48px; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 17px/1.7 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: inherit; text-decoration: none; }
+a:hover { color: var(--brass); }
+p { margin: 0 0 1.2em; }
+h1, h2, h3 { margin: 0; font-weight: 400; line-height: 1.15; }
+.serif { font-family: var(--serif); }
+.mono { font-family: var(--mono); }
+.em { color: var(--fg); font-style: italic; }
+
+.meta {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.role { font-family: var(--serif); font-style: italic; color: var(--muted); }
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.links a { border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+.links a:hover { border-color: var(--brass); }
+
+.skip {
+  position: fixed;
+  top: -60px;
+  left: 16px;
+  z-index: 50;
+  background: var(--brass);
+  color: var(--ink);
+  padding: 8px 14px;
+}
+.skip:focus { top: 12px; }
+
+/* Justice — per-line justified text (rendered by js/justify.js) */
+just-line { display: block; }
+just-inner { display: inline-block; white-space: nowrap; }
+[data-justified] { text-align: left; }
+
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* ==========================================================================
+   01 — Monograph
+   Numbered chapters in the left margin, drop cap, critical-apparatus feel.
+   ========================================================================== */
+.v-monograph .masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 20px;
+  padding: 22px clamp(24px, 6vw, 90px);
+  border-bottom: 1px solid var(--line);
+}
+.v-monograph .masthead b { font-family: var(--serif); font-size: 17px; font-weight: 400; }
+.v-monograph .masthead .role { font-size: 15px; }
+.v-monograph main { max-width: 960px; padding: 66px clamp(24px, 6vw, 90px) 90px; }
+.v-monograph .title-block { max-width: 640px; padding-bottom: 54px; }
+.v-monograph .title-block h1 {
+  font-family: var(--serif);
+  font-size: clamp(42px, 5vw, 66px);
+  letter-spacing: -.01em;
+  margin: 16px 0 12px;
+}
+.v-monograph .title-block .role { font-size: 22px; }
+.v-monograph .chapter {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 36px;
+  padding: 52px 0;
+  border-top: 1px solid var(--rule);
+}
+.v-monograph .chapter::before {
+  content: attr(data-num);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 22px;
+  color: var(--faint);
+  padding-top: 2px;
+}
+.v-monograph .chapter-body { max-width: 640px; }
+.v-monograph .chapter h2 {
+  font-family: var(--serif);
+  font-size: 25px;
+  font-variant: small-caps;
+  letter-spacing: .03em;
+  margin: 0 0 22px;
+}
+.v-monograph .chapter-body p { font-family: var(--serif); font-size: 20px; line-height: 1.75; }
+.v-monograph .entry { max-width: 660px; padding: 22px 0; border-top: 1px solid var(--rule); }
+.v-monograph .entry:first-of-type { border-top: 0; padding-top: 0; }
+.v-monograph .entry h3 { font-family: var(--serif); font-size: 22px; line-height: 1.35; margin: 0 0 8px; }
+.v-monograph .entry p { font-family: var(--serif); font-size: 18px; color: var(--muted); margin: 0 0 12px; }
+.v-monograph .services .row {
+  display: grid;
+  grid-template-columns: 205px 1fr;
+  gap: 24px;
+  padding: 18px 0;
+  border-top: 1px solid var(--rule);
+  font-family: var(--serif);
+  font-size: 17px;
+}
+.v-monograph .services .row b { font-weight: 400; font-variant: small-caps; letter-spacing: .03em; }
+.v-monograph .services .row span { color: var(--muted); }
+.v-monograph footer { max-width: 640px; padding-top: 52px; border-top: 1px solid var(--rule); }
+.v-monograph footer h2 { font-family: var(--serif); font-size: 25px; font-variant: small-caps; margin: 12px 0 16px; }
+.v-monograph footer .mail { font-family: var(--serif); font-size: 20px; color: var(--brass); border-bottom: 1px solid var(--brass-dim); padding-bottom: 3px; }
+
+/* ==========================================================================
+   02 — Journal
+   Masthead, numbered sections, APA-style hanging reference list.
+   ========================================================================== */
+.v-journal main { max-width: 900px; padding: 60px clamp(24px, 6vw, 90px) 100px; counter-reset: jsec; }
+.v-journal .jhead { border-bottom: 2px solid var(--fg); padding-bottom: 20px; }
+.v-journal .jhead h1 { font-family: var(--serif); font-size: clamp(38px, 4.6vw, 58px); margin: 14px 0 8px; }
+.v-journal .jhead .role { font-size: 20px; }
+.v-journal .jsub {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid var(--line);
+  padding: 11px 0;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.v-journal .lead { padding: 34px 0 6px; }
+.v-journal .lead p { font-family: var(--serif); font-size: 20px; line-height: 1.78; max-width: 700px; }
+.v-journal section { padding: 40px 0; border-top: 1px solid var(--rule); counter-increment: jsec; }
+.v-journal section h2 {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-variant: small-caps;
+  letter-spacing: .03em;
+  margin: 0 0 22px;
+}
+.v-journal section h2::before {
+  content: counter(jsec) ".  ";
+  font-family: var(--mono);
+  font-size: .68em;
+  color: var(--brass);
+  vertical-align: 2px;
+  letter-spacing: .04em;
+  font-variant: normal;
+}
+.v-journal .ref { max-width: 720px; margin: 0 0 22px; padding-left: 2.4em; text-indent: -2.4em; font-family: var(--serif); font-size: 18px; line-height: 1.7; }
+.v-journal .ref h3 { font-size: 19px; font-weight: 400; line-height: 1.45; margin: 0; }
+.v-journal .ref .note { display: block; color: var(--muted); }
+.v-journal .ref .links { margin-top: 10px; text-indent: 0; }
+.v-journal .service-line { display: grid; grid-template-columns: 210px 1fr; gap: 24px; padding: 16px 0; border-top: 1px solid var(--rule); font-family: var(--serif); font-size: 17px; }
+.v-journal .service-line b { font-weight: 400; font-variant: small-caps; }
+.v-journal .service-line span { color: var(--muted); }
+.v-journal footer { padding: 44px 0 0; border-top: 1px solid var(--line); }
+.v-journal footer h2 { font-family: var(--serif); font-size: 24px; font-variant: small-caps; margin: 10px 0 14px; }
+.v-journal footer .mail { font-family: var(--serif); font-size: 20px; color: var(--brass); }
+
+/* ==========================================================================
+   03 — Marginalia
+   Narrow text column with a wide right margin carrying glosses and links.
+   ========================================================================== */
+.v-marginalia main { max-width: 1060px; padding: 74px clamp(24px, 5vw, 70px) 100px; }
+.v-marginalia .hero { max-width: 640px; padding-bottom: 34px; }
+.v-marginalia .hero h1 { font-family: var(--serif); font-size: clamp(36px, 4.2vw, 54px); margin: 14px 0 10px; }
+.v-marginalia .hero .role { font-size: 20px; margin-bottom: 24px; }
+.v-marginalia .hero p { font-family: var(--serif); font-size: 20px; line-height: 1.78; }
+.v-marginalia .spread {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 240px;
+  gap: 56px;
+  padding: 44px 0;
+  border-top: 1px solid var(--rule);
+}
+.v-marginalia .main-col { max-width: 600px; }
+.v-marginalia .main-col h2 { font-family: var(--serif); font-size: 25px; font-variant: small-caps; letter-spacing: .03em; margin: 0 0 18px; }
+.v-marginalia .main-col h3 { font-family: var(--serif); font-size: 21px; line-height: 1.4; margin: 0 0 8px; }
+.v-marginalia .main-col p { font-family: var(--serif); font-size: 18px; line-height: 1.75; color: var(--muted); }
+.v-marginalia .margin-col { padding-top: 4px; }
+.v-marginalia .margin-col .label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 12px;
+}
+.v-marginalia .margin-col a {
+  display: block;
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--line);
+  padding: 7px 0;
+}
+.v-marginalia .margin-col a:hover { border-color: var(--brass); }
+
+/* ==========================================================================
+   04 — Index
+   A back-of-book index: terms with leader dots and folio marks.
+   ========================================================================== */
+.v-index main { max-width: 880px; padding: 74px clamp(24px, 6vw, 90px) 100px; }
+.v-index h1 { font-family: var(--serif); font-size: clamp(38px, 4.6vw, 58px); margin: 0 0 6px; }
+.v-index .sub { font-family: var(--serif); font-style: italic; color: var(--muted); font-size: 21px; padding-bottom: 32px; border-bottom: 2px solid var(--fg); }
+.v-index .index { margin: 26px 0 46px; }
+.v-index .row { display: flex; align-items: baseline; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+.v-index .row .term { font-family: var(--serif); font-size: 20px; white-space: nowrap; }
+.v-index .row .leader { flex: 1; border-bottom: 1px dotted var(--faint); transform: translateY(-5px); }
+.v-index .row .fig { font-family: var(--mono); font-size: 12px; letter-spacing: .06em; color: var(--muted); }
+.v-index .row.sub .term { font-family: var(--sans); font-size: 14px; padding-left: 26px; color: var(--muted); letter-spacing: .02em; }
+.v-index .row.sub .fig { font-size: 11px; }
+.v-index .row:hover .term { color: var(--brass); }
+.v-index section { padding: 44px 0; border-top: 1px solid var(--line); }
+.v-index section h2 { font-family: var(--serif); font-size: 25px; font-variant: small-caps; letter-spacing: .03em; margin: 0 0 22px; }
+.v-index .entry { max-width: 680px; padding: 20px 0; border-top: 1px solid var(--rule); }
+.v-index .entry h3 { font-family: var(--serif); font-size: 21px; line-height: 1.4; margin: 0 0 7px; }
+.v-index .entry p { font-family: var(--serif); font-size: 18px; color: var(--muted); margin: 0 0 11px; }
+.v-index .service-line { display: grid; grid-template-columns: 210px 1fr; gap: 24px; padding: 16px 0; border-top: 1px solid var(--rule); font-family: var(--serif); font-size: 17px; }
+.v-index .service-line b { font-weight: 400; font-variant: small-caps; }
+.v-index .service-line span { color: var(--muted); }
+.v-index footer { padding: 48px 0 0; border-top: 1px solid var(--line); }
+.v-index footer h2 { font-family: var(--serif); font-size: 25px; font-variant: small-caps; }
+.v-index footer .mail { font-family: var(--serif); font-size: 20px; color: var(--brass); }
+
+/* ==========================================================================
+   05 — Broadside
+   Editorial masthead, oversized display type, double rules, two-column work.
+   ========================================================================== */
+.v-broadside .masthead { padding: 34px clamp(24px, 6vw, 90px) 24px; border-bottom: 3px double var(--fg); }
+.v-broadside .kicker { font-size: 11px; letter-spacing: .34em; text-transform: uppercase; color: var(--brass); }
+.v-broadside h1 { font-family: var(--serif); font-size: clamp(54px, 10vw, 128px); line-height: .92; letter-spacing: -.02em; margin: 18px 0 10px; }
+.v-broadside .role { font-size: clamp(20px, 2vw, 26px); }
+.v-broadside main { max-width: 1120px; padding: 48px clamp(24px, 6vw, 90px) 100px; }
+.v-broadside .lead { display: grid; grid-template-columns: repeat(2, 1fr); gap: 44px; font-family: var(--serif); font-size: 19px; line-height: 1.78; padding-bottom: 44px; border-bottom: 1px solid var(--line); }
+.v-broadside section { padding: 46px 0; border-bottom: 1px solid var(--line); }
+.v-broadside h2 { font-family: var(--sans); font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: var(--brass); margin: 0 0 26px; }
+.v-broadside .work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 38px 56px; }
+.v-broadside .entry h3 { font-family: var(--serif); font-size: 24px; line-height: 1.3; margin: 0 0 8px; }
+.v-broadside .entry p { font-family: var(--serif); font-size: 18px; color: var(--muted); margin: 0 0 12px; }
+.v-broadside .service-line { display: grid; grid-template-columns: 190px 1fr; gap: 30px; padding: 16px 0; border-top: 1px solid var(--rule); font-family: var(--serif); font-size: 17px; }
+.v-broadside .service-line b { font-weight: 400; font-variant: small-caps; }
+.v-broadside .service-line span { color: var(--muted); }
+.v-broadside footer { padding: 52px 0 0; }
+.v-broadside footer h2 { font-family: var(--serif); font-size: clamp(30px, 4vw, 52px); color: var(--fg); letter-spacing: normal; text-transform: none; margin: 12px 0 16px; }
+.v-broadside footer .mail { font-family: var(--serif); font-size: 24px; color: var(--brass); }
+
+/* ==========================================================================
+   06 — Thesis
+   Formal title page, numbered contents, indented paragraphs.
+   ========================================================================== */
+.v-thesis main { max-width: 840px; padding: 80px clamp(24px, 6vw, 90px) 100px; }
+.v-thesis .titlepage { border-top: 3px solid var(--fg); border-bottom: 3px solid var(--fg); padding: 46px 0; }
+.v-thesis .titlepage h1 { font-family: var(--serif); font-size: clamp(40px, 5vw, 66px); margin: 16px 0 12px; }
+.v-thesis .titlepage .sub { font-size: 22px; }
+.v-thesis .contents { margin: 40px 0 8px; }
+.v-thesis .contents .label { display: block; margin-bottom: 12px; }
+.v-thesis .contents a { display: flex; justify-content: space-between; gap: 20px; padding: 11px 0; border-bottom: 1px solid var(--rule); font-family: var(--serif); font-size: 18px; }
+.v-thesis .contents a span:last-child { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.v-thesis .contents a:hover { color: var(--brass); }
+.v-thesis .lead { padding: 44px 0 8px; }
+.v-thesis .lead p { font-family: var(--serif); font-size: 19px; line-height: 1.82; }
+.v-thesis section { padding: 46px 0; border-top: 1px solid var(--line); }
+.v-thesis section h2 { font-family: var(--serif); font-size: 24px; font-variant: small-caps; letter-spacing: .03em; margin: 0 0 20px; }
+.v-thesis section h2::before { content: attr(data-num) ".  "; font-family: var(--mono); font-size: .68em; color: var(--brass); vertical-align: 2px; font-variant: normal; }
+.v-thesis p { font-family: var(--serif); font-size: 19px; line-height: 1.82; }
+.v-thesis .indent p { text-indent: 2.2em; }
+.v-thesis .indent p:first-of-type { text-indent: 0; }
+.v-thesis .entry { max-width: 680px; padding: 20px 0; border-top: 1px solid var(--rule); }
+.v-thesis .entry h3 { font-family: var(--serif); font-size: 21px; line-height: 1.4; margin: 0 0 7px; }
+.v-thesis .entry p { font-size: 18px; color: var(--muted); margin: 0 0 11px; }
+.v-thesis .service-line { display: grid; grid-template-columns: 205px 1fr; gap: 24px; padding: 16px 0; border-top: 1px solid var(--rule); }
+.v-thesis .service-line b { font-weight: 400; font-variant: small-caps; }
+.v-thesis .service-line span { color: var(--muted); }
+.v-thesis footer { padding: 46px 0 0; border-top: 1px solid var(--line); }
+.v-thesis footer h2 { font-family: var(--serif); font-size: 24px; font-variant: small-caps; }
+.v-thesis footer .mail { font-family: var(--serif); font-size: 20px; color: var(--brass); }
+
+/* ==========================================================================
+   07 — Footnote
+   Reading column with an endnote apparatus carrying the work references.
+   ========================================================================== */
+.v-footnote main { max-width: 960px; padding: 78px clamp(24px, 6vw, 70px) 100px; }
+.v-footnote .intro-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  gap: 54px;
+  align-items: start;
+}
+.v-footnote .intro-text { min-width: 0; }
+.v-footnote .intro-figure {
+  width: 220px;
+  aspect-ratio: 1;
+  margin: 10px 0 0;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.v-footnote .intro-figure img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translateY(7%) scale(1.38);
+}
+@media (max-width: 775px) {
+  .v-footnote .intro-grid { grid-template-columns: 1fr; gap: 26px; }
+  .v-footnote .intro-figure { width: 170px; margin: 0; }
+}
+.v-footnote .hero h1 { font-family: var(--serif); font-size: clamp(38px, 4.6vw, 56px); margin: 12px 0 10px; }
+.v-footnote .hero .role { font-size: 20px; }
+.v-footnote .body { padding: 30px 0 6px; border-bottom: 1px solid var(--line); }
+.v-footnote .body p { font-family: var(--serif); font-size: 20px; line-height: 1.82; }
+.v-footnote section { padding: 40px 0; border-top: 1px solid var(--rule); }
+.v-footnote section h2 { font-family: var(--serif); font-size: 24px; font-variant: small-caps; letter-spacing: .03em; margin: 0 0 20px; }
+.v-footnote .service-line { display: grid; grid-template-columns: 205px 1fr; gap: 24px; padding: 16px 0; border-top: 1px solid var(--rule); font-family: var(--serif); font-size: 17px; }
+.v-footnote .service-line b { font-weight: 400; font-variant: small-caps; }
+.v-footnote .service-line span { color: var(--muted); }
+.v-footnote sup.fn a { font-family: var(--sans); font-size: 10px; color: var(--brass); vertical-align: super; letter-spacing: .04em; padding: 0 1px; }
+.v-footnote .notes { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--line); }
+.v-footnote .notes .label { display: block; margin-bottom: 14px; }
+.v-footnote .note { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 12px; padding: 13px 0; border-top: 1px solid var(--rule); }
+.v-footnote .note .n { font-family: var(--sans); font-size: 10px; color: var(--brass); padding-top: 4px; }
+.v-footnote .note h3 { font-family: var(--serif); font-size: 18px; line-height: 1.4; margin: 0 0 5px; }
+.v-footnote .note p { font-family: var(--serif); font-size: 16px; color: var(--muted); margin: 0 0 9px; }
+.v-footnote .note .links a { font-size: 10px; }
+.v-footnote footer { padding: 46px 0 0; border-top: 1px solid var(--line); }
+.v-footnote footer h2 { font-family: var(--serif); font-size: 24px; font-variant: small-caps; }
+.v-footnote footer .mail { font-family: var(--serif); font-size: 20px; color: var(--brass); }
+
+/* ==========================================================================
+   08 — Register
+   Institutional ledger: ruled rows, tabular figures, mono running marks.
+   ========================================================================== */
+.v-register .head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px clamp(24px, 6vw, 80px);
+  border-bottom: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.v-register main { max-width: 1000px; padding: 58px clamp(24px, 6vw, 80px) 100px; }
+.v-register .reg-head h1 { font-family: var(--serif); font-size: clamp(36px, 4.2vw, 54px); }
+.v-register .reg-head .role { font-size: 20px; margin-top: 4px; }
+.v-register .lead { max-width: 700px; padding: 30px 0 8px; font-family: var(--serif); font-size: 20px; line-height: 1.78; }
+.v-register section { padding: 42px 0; border-top: 1px solid var(--line); }
+.v-register section h2 { font-family: var(--sans); font-size: 11px; letter-spacing: .26em; text-transform: uppercase; color: var(--brass); margin: 0 0 24px; }
+.v-register .row { padding: 20px 0; border-top: 1px solid var(--rule); }
+.v-register .r-top { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; }
+.v-register .r-top h3 { font-family: var(--serif); font-size: 22px; line-height: 1.35; }
+.v-register .r-index { font-family: var(--mono); font-size: 12px; color: var(--faint); font-variant-numeric: tabular-nums; }
+.v-register .row p { font-family: var(--serif); font-size: 18px; color: var(--muted); margin: 8px 0 12px; max-width: 680px; }
+.v-register table.services { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.v-register table.services td { border-top: 1px solid var(--rule); padding: 16px 0; vertical-align: top; font-family: var(--serif); font-size: 17px; line-height: 1.7; }
+.v-register table.services td:first-child { width: 210px; font-variant: small-caps; letter-spacing: .03em; padding-right: 26px; }
+.v-register table.services td:last-child { color: var(--muted); }
+.v-register footer { padding: 46px 0 0; border-top: 1px solid var(--line); }
+.v-register footer h2 { font-family: var(--sans); font-size: 11px; letter-spacing: .26em; text-transform: uppercase; color: var(--brass); margin-bottom: 14px; }
+.v-register footer .mail { font-family: var(--serif); font-size: 20px; color: var(--brass); }
+
+/* ==========================================================================
+   09 — Reader
+   Quiet longform: no chrome, one column, generous space, minimal rules.
+   ========================================================================== */
+.v-reader main { max-width: 640px; padding: 120px max(24px, 9vw) 140px; }
+.v-reader h1 { font-family: var(--serif); font-size: clamp(34px, 4vw, 46px); margin: 0 0 8px; }
+.v-reader .role { font-size: 19px; margin-bottom: 54px; }
+.v-reader p { font-family: var(--serif); font-size: 20px; line-height: 1.88; }
+.v-reader section { margin-top: 66px; }
+.v-reader h2 { font-family: var(--serif); font-size: 21px; font-variant: small-caps; letter-spacing: .04em; margin: 0 0 20px; }
+.v-reader .work { padding: 22px 0; border-top: 1px solid var(--rule); }
+.v-reader .work h3 { font-family: var(--serif); font-size: 20px; line-height: 1.45; margin: 0 0 6px; }
+.v-reader .work p { font-size: 18px; line-height: 1.75; color: var(--muted); margin: 0 0 8px; }
+.v-reader .links { font-size: 12px; gap: 18px; }
+.v-reader .service-line { padding: 16px 0; border-top: 1px solid var(--rule); }
+.v-reader .service-line b { font-family: var(--serif); font-size: 18px; font-weight: 400; font-variant: small-caps; }
+.v-reader .service-line span { display: block; font-family: var(--serif); font-size: 17px; color: var(--muted); margin-top: 4px; }
+.v-reader footer { margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--line); }
+.v-reader footer h2 { font-family: var(--serif); font-size: 21px; font-variant: small-caps; }
+.v-reader footer .mail { font-family: var(--serif); font-size: 20px; color: var(--brass); }
+
+/* ==========================================================================
+   10 — Spine
+   Vertical identity spine on the left, content sheet, right-hand contents.
+   ========================================================================== */
+.v-spine .spine {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: 86px;
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 0;
+  background: var(--bg2);
+  z-index: 5;
+}
+.v-spine .spine .name {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--serif);
+  font-size: 19px;
+  letter-spacing: .06em;
+  color: var(--fg);
+}
+.v-spine .spine .role {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.v-spine main { margin-left: 86px; max-width: 880px; padding: 96px clamp(28px, 6vw, 90px) 120px; }
+.v-spine .hero h1 { font-family: var(--serif); font-size: clamp(38px, 4.6vw, 58px); margin: 14px 0 12px; }
+.v-spine .hero .role { font-size: 20px; margin-bottom: 26px; }
+.v-spine .hero p { font-family: var(--serif); font-size: 20px; line-height: 1.78; max-width: 640px; }
+.v-spine section { padding: 44px 0; border-top: 1px solid var(--line); }
+.v-spine section h2 { font-family: var(--serif); font-size: 25px; font-variant: small-caps; letter-spacing: .03em; margin: 0 0 22px; }
+.v-spine .entry { max-width: 680px; padding: 20px 0; border-top: 1px solid var(--rule); }
+.v-spine .entry h3 { font-family: var(--serif); font-size: 21px; line-height: 1.4; margin: 0 0 7px; }
+.v-spine .entry p { font-family: var(--serif); font-size: 18px; color: var(--muted); margin: 0 0 11px; }
+.v-spine .service-line { display: grid; grid-template-columns: 205px 1fr; gap: 24px; padding: 16px 0; border-top: 1px solid var(--rule); font-family: var(--serif); font-size: 17px; }
+.v-spine .service-line b { font-weight: 400; font-variant: small-caps; }
+.v-spine .service-line span { color: var(--muted); }
+.v-spine footer { padding: 48px 0 0; border-top: 1px solid var(--line); }
+.v-spine footer h2 { font-family: var(--serif); font-size: 25px; font-variant: small-caps; }
+.v-spine footer .mail { font-family: var(--serif); font-size: 20px; color: var(--brass); }
+
+/* Shared floating switcher */
+.dock {
+  position: fixed;
+  right: 16px;
+  bottom: 14px;
+  z-index: 40;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  padding: 7px 13px;
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.dock a { border: 0; }
+.dock a:hover { color: var(--brass); }
+.dock .up { color: var(--fg); }
+
+/* ==========================================================================
+   Gallery
+   ========================================================================== */
+.v-gallery main { max-width: 900px; padding: 80px clamp(24px, 6vw, 90px) 100px; }
+.v-gallery h1 { font-family: var(--serif); font-size: clamp(40px, 5vw, 64px); margin: 12px 0 10px; }
+.v-gallery .sub { font-family: var(--serif); font-style: italic; color: var(--muted); font-size: 21px; padding-bottom: 30px; border-bottom: 2px solid var(--fg); }
+.v-gallery .lede { font-family: var(--serif); font-size: 19px; color: var(--muted); max-width: 640px; margin: 26px 0 6px; }
+.v-gallery .item { display: grid; grid-template-columns: 54px minmax(0, 1fr); gap: 22px; padding: 26px 0; border-top: 1px solid var(--rule); }
+.v-gallery .item .num { font-family: var(--mono); font-size: 12px; color: var(--brass); padding-top: 8px; }
+.v-gallery .item h2 { font-family: var(--serif); font-size: 24px; margin: 0 0 6px; }
+.v-gallery .item .kind { font-family: var(--sans); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--faint); margin: 0 0 8px; }
+.v-gallery .item p { font-family: var(--serif); font-size: 17px; color: var(--muted); margin: 0 0 10px; max-width: 620px; }
+.v-gallery .item:hover h2 { color: var(--brass); }
+
+/* Responsive, kept light */
+@media (max-width: 820px) {
+  .v-monograph .chapter { grid-template-columns: 54px minmax(0, 1fr); gap: 20px; }
+  .v-monograph .services .row,
+  .v-journal .service-line,
+  .v-index .service-line,
+  .v-thesis .service-line,
+  .v-footnote .service-line,
+  .v-spine .service-line { grid-template-columns: 1fr; gap: 6px; }
+  .v-marginalia .spread { grid-template-columns: 1fr; gap: 20px; }
+  .v-broadside .lead { grid-template-columns: 1fr; gap: 0; }
+  .v-broadside .work-grid { grid-template-columns: 1fr; }
+  .v-register table.services td:first-child { width: 150px; }
+}
+
+/* ---- merged from academic-07-variants.css ---- */
+/* ==========================================================================
+   academic-07 variants
+   .v-footnote-panels    — the reference's left sidebar + right "On this page"
+                           panels, adapted to the dark academic theme.
+   .v-footnote-reference — the reference's typography, sizes and spacing
+                           (Cormorant Garamond) on a black ground with gold,
+                           no side panels.
+   ========================================================================== */
+
+/* ---------- shared refined nav (all three variants) --------------------- */
+.refined-nav {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 24px;
+  margin: 0 0 36px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.refined-nav a:hover { color: var(--brass); }
+.refined-nav a[aria-current] { color: var(--fg); }
+@media (max-width: 820px) {
+  .refined-nav { gap: 6px 16px; font-size: 10px; }
+}
+
+/* ---------- 07 · panels ------------------------------------------------- */
+.v-footnote-panels .sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: 236px;
+  display: flex;
+  flex-direction: column;
+  padding: 48px 30px;
+  border-right: 1px solid var(--line);
+  background: var(--bg);
+  z-index: 5;
+}
+.v-footnote-panels .sidebar .site-name {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 24px;
+  line-height: 1.3;
+  color: var(--fg);
+}
+.v-footnote-panels .sidebar nav {
+  display: grid;
+  gap: 14px;
+  margin-top: 58px;
+  font: 400 14px/1.4 var(--sans);
+  color: var(--muted);
+}
+.v-footnote-panels .sidebar nav a[aria-current] { color: var(--fg); }
+.v-footnote-panels .sidebar nav a:hover { color: var(--brass); }
+.v-footnote-panels .sidebar-contact { margin-top: auto; font: 400 13px/1.4 var(--sans); color: var(--muted); }
+.v-footnote-panels .sidebar-contact:hover { color: var(--brass); }
+
+/* Classic top navigation replaces the old left panel. */
+.v-footnote-panels .site-head .brand {
+  font-family: "Cormorant Garamond", Georgia, serif;
+}
+
+.v-footnote-panels {
+  --serif: "Cormorant Garamond", Georgia, serif;
+  padding-left: 236px;
+  padding-right: 190px;
+}
+.v-footnote-panels main { margin-left: auto; margin-right: auto; }
+.v-footnote-panels .intro-grid { align-items: center; }
+.v-footnote-panels .intro-figure { margin: 0; }
+.v-footnote-panels .intro-grid .body { border-bottom: 0; }
+.v-footnote-panels .hero h1,
+.v-footnote-panels .hero .role,
+.v-footnote-panels .intro-grid .body p { font-family: "Cormorant Garamond", Georgia, serif; }
+
+.v-footnote-panels .toc {
+  position: fixed;
+  right: 30px;
+  top: 58px;
+  width: 150px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.v-footnote-panels .toc > span {
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.v-footnote-panels .toc nav {
+  display: grid;
+  gap: 13px;
+  margin-top: 20px;
+  padding-left: 16px;
+  border-left: 1px solid var(--line);
+}
+.v-footnote-panels .toc a[aria-current] { color: var(--fg); }
+.v-footnote-panels .toc a:hover { color: var(--brass); }
+
+@media (max-width: 1080px) {
+  .v-footnote-panels .toc { display: none; }
+  .v-footnote-panels { padding-right: 0; }
+}
+@media (max-width: 775px) {
+  /* Match the original portfolio's mobile layout: a centred top bar, the
+     portrait above the bio, and full-width content. */
+  .v-footnote-panels { padding: 0; font-size: 1rem; }
+  .v-footnote-panels .sidebar {
+    position: static;
+    width: calc(100% - 2rem);
+    margin: 0 1rem 0.5rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding: 24px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .v-footnote-panels .sidebar .site-name { font-size: 1.75rem; text-align: center; }
+  .v-footnote-panels .sidebar nav { display: flex; gap: 1rem; margin: 1rem 0 0; font-family: "Cormorant Garamond", Georgia, serif; font-size: 1rem; }
+  .v-footnote-panels .sidebar-contact { display: none; }
+  .v-footnote-panels .toc { display: none; }
+  .v-footnote-panels main { margin: 0; max-width: none; padding: 0 1rem; }
+  .v-footnote-panels .hero {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .v-footnote-panels .intro-grid { display: flex; flex-direction: column; align-items: center; gap: 0; padding: 1.5rem 1.5rem 1rem; }
+  .v-footnote-panels .intro-figure { order: -1; width: 150px; margin: 0 auto 2rem; }
+  .v-footnote-panels .intro-grid .body { width: 100%; }
+  .v-footnote-panels .v-footnote-reference section { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .v-footnote-panels-left main { margin-left: 0; }
+
+  /* Type — mirrors the original portfolio's mobile sizing (styles.css ≤775px).
+     Above this breakpoint the desktop panel layout returns with standard sizes. */
+  .v-footnote-panels .intro-grid .body p { font-size: 0.95rem; line-height: 1.5; }
+  .v-footnote-panels .v-footnote-reference { font-size: 1rem; line-height: 1.5; font-weight: 300; }
+  .v-footnote-panels .v-footnote-reference section h2 {
+    font-size: 34px;
+    line-height: 1.5;
+    font-weight: 300;
+    letter-spacing: normal;
+    margin: 0 0 1rem;
+  }
+  .v-footnote-panels .v-footnote-reference section p { font-size: 1rem; line-height: 1.5; }
+  .v-footnote-panels .v-footnote-reference .service-line b { font-size: 21px; font-weight: 300; }
+  .v-footnote-panels .v-footnote-reference .service-line span { font-size: 1rem; line-height: 1.5; }
+  .v-footnote-panels .v-footnote-reference .note h3 { font-size: 1rem; font-weight: 700; line-height: 1.5; }
+  .v-footnote-panels .v-footnote-reference .note p { font-size: 0.71rem; line-height: 1.5; }
+  .v-footnote-panels .v-footnote-reference .note .links a { font-size: 1rem; }
+  .v-footnote-panels .v-footnote-reference footer h2 { font-size: 32px; line-height: 1.5; font-weight: 300; }
+  .v-footnote-panels .v-footnote-reference footer p { font-size: 1rem; }
+  .v-footnote-panels .v-footnote-reference footer .mail { font-size: 1rem; }
+  .v-footnote-panels .v-footnote-reference .project h3 { font-size: 1rem; font-weight: 700; line-height: 1.5; }
+  .v-footnote-panels .v-footnote-reference .project p { font-size: 0.71rem; line-height: 1.5; }
+  .v-footnote-panels .v-footnote-reference .project .links a { font-size: 1rem; }
+  .v-footnote-panels .v-footnote-reference .site-footer { font-size: 12px; }
+}
+
+@media (width <= 775px) and (width > 400px) {
+  .v-footnote-panels .sidebar .site-name { font-size: 2rem; }
+  .v-footnote-panels .sidebar nav { font-size: 19.1875px; }
+}
+
+/* Left-aligned panels: the body hugs the left panel (gap capped at ~2in/192px)
+   while the "On this page" nav stays pinned to the right. */
+.v-footnote-panels-left main {
+  margin-left: clamp(48px, 4vw, 192px);
+  margin-right: auto;
+}
+
+/* ---------- 07 · reference typography ----------------------------------- */
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("../assets/fonts/CormorantGaramond-VariableFont_wght.woff2") format("woff2");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("../assets/fonts/CormorantGaramond-Italic-VariableFont_wght.woff2") format("woff2");
+  font-weight: 300 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+.v-footnote-reference {
+  --fg: #f5f2ea;
+  --muted: #b8b1a1;
+  --faint: #7d765f;
+  --line: #34302a;
+  --rule: #241f19;
+  --brass: #cfcfcf;
+  --serif: "Cormorant Garamond", Georgia, serif;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 23px;
+  line-height: 1.6;
+}
+
+.v-footnote-reference main { max-width: 1000px; padding: 70px clamp(24px, 6vw, 80px) 110px; }
+
+.v-footnote-reference .intro-grid { grid-template-columns: minmax(0, 1fr) 220px; gap: 40px; align-items: center; }
+.v-footnote-reference .intro-figure { width: 220px; margin: 0; border: 0; }
+
+.v-footnote-reference .hero h1 {
+  font-size: 50px;
+  line-height: 1.2;
+  letter-spacing: -.6px;
+  font-weight: 400;
+  margin: 0 0 10px;
+}
+.v-footnote-reference .hero .role { font-size: 16px; font-style: italic; color: var(--muted); }
+.v-footnote-reference .meta {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--muted);
+}
+.v-footnote-reference .body { padding: 0 0 30px; border-bottom: 1px solid var(--line); }
+.v-footnote-reference .body p { font-size: 23px; line-height: 1.6; margin: 0 0 23px; }
+
+.v-footnote-reference section { padding: 30px 0 40px; border-top: 1px solid var(--line); }
+.v-footnote-reference section h2 {
+  font-size: 40px;
+  line-height: 1.2;
+  letter-spacing: -.3px;
+  font-weight: 400;
+  font-variant: normal;
+  margin: 0 0 22px;
+}
+.v-footnote-reference p { font-size: 20px; line-height: 1.65; margin: 0 0 23px; }
+.v-footnote-reference .section-body { margin-left: 0; }
+
+.v-footnote-reference .service-line { display: block; padding: 0; border: 0; margin: 0 0 33px; }
+.v-footnote-reference .service-line b {
+  display: block;
+  font-family: inherit;
+  font-size: 23px;
+  font-weight: 400;
+  font-variant: normal;
+  letter-spacing: 0;
+  color: var(--fg);
+  margin: 0 0 8px;
+}
+.v-footnote-reference .service-line span { display: block; font-size: 20px; line-height: 1.65; color: var(--fg); }
+
+.v-footnote-reference .links { font-family: inherit; gap: 20px; }
+.v-footnote-reference .links a {
+  font-size: 17px;
+  letter-spacing: 0;
+  text-transform: none;
+  border: 0;
+  padding: 0;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.v-footnote-reference .links a:hover { color: var(--brass); }
+
+.v-footnote-reference p a,
+.v-footnote-reference .project h3 a,
+.v-footnote-reference footer .mail {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--brass-dim);
+}
+
+.v-footnote-reference p a:hover,
+.v-footnote-reference .project h3 a:hover,
+.v-footnote-reference footer .mail:hover {
+  text-decoration-color: var(--brass);
+}
+
+.v-footnote-reference sup.fn a {
+  text-decoration: none;
+}
+
+.v-footnote-reference .notes { margin-top: 50px; padding-top: 24px; border-top: 1px solid var(--line); }
+.v-footnote-reference .note {
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 14px;
+  padding: 18px 0;
+  border-top: 1px solid var(--rule);
+}
+.v-footnote-reference .note .n { font-family: inherit; font-size: 14px; color: var(--brass); padding-top: 2px; }
+.v-footnote-reference .note h3 { font-size: 21px; line-height: 1.4; margin: 0 0 4px; }
+.v-footnote-reference .note p { font-size: 17px; line-height: 1.55; color: var(--muted); margin: 0 0 8px; }
+.v-footnote-reference .note .links a { font-size: 15px; }
+
+.v-footnote-reference footer { padding: 40px 0 0; border-top: 1px solid var(--line); }
+.v-footnote-reference footer h2 { font-size: 40px; letter-spacing: -.3px; margin: 10px 0 16px; }
+.v-footnote-reference footer .mail { font-family: inherit; font-size: 24px; color: var(--brass); }
+.v-footnote-reference .site-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 14px;
+  color: var(--muted);
+}
+.v-footnote-reference .project { padding: 20px 0; border-top: 1px solid var(--rule); }
+.v-footnote-reference .project:first-of-type { border-top: 0; padding-top: 0; }
+.v-footnote-reference .project h3 { font-size: 21px; line-height: 1.4; font-weight: 400; margin: 0 0 4px; }
+.v-footnote-reference .project p { font-size: 17px; line-height: 1.55; color: var(--muted); margin: 0 0 8px; }
+.v-footnote-reference .project .links a { font-size: 15px; }
+
+@media (max-width: 775px) {
+  .v-footnote-reference main { padding: 50px 22px 90px; }
+  .v-footnote-reference .intro-grid { grid-template-columns: 1fr; gap: 26px; }
+  .v-footnote-reference .intro-figure { width: 180px; }
+  .v-footnote-reference .section-body { margin-left: 0; }
+  .v-footnote-reference .hero h1 { font-size: 40px; }
+  .v-footnote-reference section h2 { font-size: 30px; }
+}
