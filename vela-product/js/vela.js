@@ -1,0 +1,1 @@
+VelaField.mount(document.getElementById('field'), {"mode": "vortex", "colors": ["#141414", "#8b8b8b", "#f5f5f5"], "center": [0.78, 0.47], "arms": 2, "radius": 0.30, "flat": 0.5, "spin": 0.006, "spinPlane": true, "tilt": 0.349066, "haze": true, "parallax": 0, "wobble": 0, "seed": 304});

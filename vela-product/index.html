@@ -1,99 +1,118 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-CA">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Vela. Your code, your agents, one desktop workspace.">
-  <title>Vela — Your code. Your agents. One home.</title>
-  <link rel="icon" href="assets/icon.png">
-  <link rel="stylesheet" href="css/style.css?v=2">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vela — IDE | Tylon Sohnle</title>
+<meta name="description" content="Vela is a desktop IDE for coding agents: eight sessions, real diffs, the editor, terminal, and workspace in one window.">
+<link rel="canonical" href="https://tylonsohnle.com/vela-product/">
+<link rel="icon" href="assets/icon.png">
+<meta name="theme-color" content="#000000">
+<link rel="stylesheet" href="css/style.css?v=ide1">
 </head>
-<body class="iteration-page d1">
-  <a class="skip" href="#main">Skip to content</a>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="art" aria-hidden="true">
+  <div class="glow"></div>
+  <canvas id="field"></canvas>
+  <div class="veil"></div>
+  <div class="vignette"></div>
+  <div class="scan"></div>
+  <div class="grain"></div>
+</div>
 
-  <header class="site-header">
-    <a class="brand" href="#main" aria-label="Vela home"><img src="assets/icon.png" width="40" height="40" alt=""><span>Vela</span></a>
-    <nav aria-label="Main navigation">
-      <a href="#workspace">Workspace</a>
-      <a href="https://github.com/Tsohnle95/vela#setup" target="_blank" rel="noopener">Setup</a>
-      <a href="https://github.com/Tsohnle95/vela" target="_blank" rel="noopener">GitHub ↗</a>
+<header class="top">
+  <div class="shell top-row">
+    <a class="brand" href="#main" aria-label="Vela home">
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <path d="M3 27 13 4l4 13-5 10H3Z" fill="currentColor"/>
+        <path d="M29 27 19 4l-4 13 5 10h9Z" fill="currentColor" opacity=".5"/>
+      </svg>
+      <span class="word">Vela</span>
+    </a>
+    <nav aria-label="Primary">
+      <a href="../project-studies-ember/vela.html">Case study</a>
+      <a href="https://github.com/Tsohnle95/vela#readme" target="_blank" rel="noopener">Docs</a>
+      <a href="https://github.com/Tsohnle95/vela/releases" target="_blank" rel="noopener">Download</a>
     </nav>
-    <a class="button" href="https://github.com/Tsohnle95/vela/releases" target="_blank" rel="noopener">Get Vela<span aria-hidden="true">↗</span></a>
-  </header>
+  </div>
+</header>
 
-  <main id="main" tabindex="-1">
-    <section class="home-hero">
-      <div class="hero-copy">
-        <h1>Your code.<br> Your agents.<br> <em>One home.</em></h1>
-        <p>Keep the editor, the conversation, and the changes in one desktop workspace.</p>
-        <a class="button" href="https://github.com/Tsohnle95/vela/releases" target="_blank" rel="noopener">Download for macOS<span aria-hidden="true">↗</span></a>
-      </div>
-      <div class="home-art">
-        <div class="home-orbit orbit-one"></div>
-        <div class="home-orbit orbit-two"></div>
-        <svg class="vela-mark" viewBox="0 0 200 160" aria-hidden="true">
-          <path fill="#adedd9" d="M36 8 100 92 31 154 0 139Z"/>
-          <path fill="#62c4ad" d="M36 8 100 92 31 154 67 120Z"/>
-          <path fill="#b5f4dc" d="m164 8 36 131-31 15-69-62Z"/>
-          <path fill="#389d8e" d="m164 8 36 131-31 15-36-34Z"/>
-          <path fill="#18786f" d="m164 8-31 112-33-28Z"/>
-        </svg>
-        <div class="home-screen">
-          <figure class="app-shot window-shot" id="workspace">
-            <img src="assets/vela-light.png" width="1619" height="971" alt="Vela in a light theme, with the file tree, a chat controller in the editor, and an OpenCode conversation in one window.">
-          </figure>
+<div class="rail rail-right" aria-label="Cockpit panels">
+      <button class="on" data-label="Explorer" aria-label="Explorer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35"><circle cx="12" cy="12" r="4"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
+        <span class="n">01</span>
+      </button>
+      <button class="" data-label="Editor" aria-label="Editor">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35"><path d="M4 6h16M4 12h10M4 18h13"/><circle cx="17" cy="12" r="2"/><circle cx="9" cy="18" r="2"/></svg>
+        <span class="n">02</span>
+      </button>
+      <button class="" data-label="Terminal" aria-label="Terminal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35"><path d="M9 7a2 2 0 1 1 2 2v6a2 2 0 1 1-2 2M15 7a2 2 0 1 0-2 2v6a2 2 0 1 0 2 2M9 12h6"/></svg>
+        <span class="n">03</span>
+      </button>
+      <button class="" data-label="Sessions" aria-label="Sessions">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35"><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/><path d="m9 9 6 6"/></svg>
+        <span class="n">04</span>
+      </button>
+      <button class="" data-label="Diffs" aria-label="Diffs">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M10 4v16"/></svg>
+        <span class="n">05</span>
+      </button>
+      <button class="" data-label="Permissions" aria-label="Permissions">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35"><path d="M12 3 4 6v5c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+        <span class="n">06</span>
+      </button>
+      <button class="" data-label="Mobile" aria-label="Mobile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35"><circle cx="12" cy="12" r="8"/><path d="M4 12h16M12 4c3 3 3 13 0 16M12 4c-3 3-3 13 0 16"/></svg>
+        <span class="n">07</span>
+      </button>
+      <button class="" data-label="Usage" aria-label="Usage">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg>
+        <span class="n">08</span>
+      </button>
+</div>
+
+<main id="main" class="shell main" tabindex="-1">
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>
+          <span class="line">Vela <span class="accent">IDE</span></span>
+      </h1>
+      <p class="sub">A desktop IDE for coding agents: eight sessions, real diffs, the editor, terminal, and workspace in one window.</p>
+      <div class="install" data-install>
+        <div class="tabs" role="tablist" aria-label="Run Vela">
+            <button type="button" data-cmd="git clone https://github.com/Tsohnle95/vela.git" role="tab" aria-selected="true">GIT</button>
+            <button type="button" data-cmd="cd vela &amp;&amp; npm install &amp;&amp; npm run dev" role="tab" aria-selected="false">DEV</button>
+            <button type="button" data-cmd="npm run pack" role="tab" aria-selected="false">PACK</button>
+            <button type="button" data-cmd="open https://github.com/Tsohnle95/vela" role="tab" aria-selected="false">REPO</button>
+          <span class="os">MACOS · NODE 22</span>
+        </div>
+        <div class="cmd">
+          <span class="sigil">$</span>
+          <code data-cmd-text>git clone https://github.com/Tsohnle95/vela.git</code>
+          <button class="copy" type="button" data-copy aria-label="Copy command">COPY</button>
         </div>
       </div>
-    </section>
-
-    <section class="home-product">
-      <h2>Stay with the work.</h2>
-      <p>Open a repository. Give OpenCode a task. Follow the changes beside your code.</p>
-      <figure class="app-shot window-shot">
-        <img src="assets/vela-light.png" width="1619" height="971" alt="Vela in a light theme, with the file tree, a chat controller in the editor, and an OpenCode conversation in one window.">
-      </figure>
-    </section>
-
-    <section class="feature-row">
-      <article>
-        <h2>Code at home.</h2>
-        <p>Browse your repository and edit with Monaco, tabs, and autosave.</p>
-      </article>
-      <article>
-        <h2>Keep your agent close.</h2>
-        <p>Give OpenCode the task and follow the conversation beside your code.</p>
-      </article>
-      <article>
-        <h2>See what changed.</h2>
-        <p>Follow observed file changes and review per-file diffs when starting contents are available.</p>
-      </article>
-    </section>
-
-    <section class="questions">
-      <h2>A few good questions.</h2>
-      <div>
-        <details>
-          <summary>What is Vela?</summary>
-          <p>A desktop workspace that brings a Monaco editor, OpenCode sessions, an integrated terminal, and live file changes into one window.</p>
-        </details>
-        <details>
-          <summary>What do I need to run it?</summary>
-          <p>Have OpenCode V2 available on your PATH before starting an agent session. The source setup guide is available on GitHub.</p>
-        </details>
-        <details>
-          <summary>Can I follow more than one task?</summary>
-          <p>Agent mode tiles up to eight sessions. Each panel keeps its own conversation and context.</p>
-        </details>
+      <div class="compat">
+        <p class="label">Built with</p>
+        <div class="row">
+          <span class="mark" title="OPENCODE V2"><span class="glyph"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.15"><path d="m4 5 5 5-5 5M10 15h4" stroke-linecap="round"/></svg></span><span class="name">OPENCODE V2</span></span>
+          <span class="mark" title="MONACO"><span class="glyph"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.15"><path d="M8 2 14 8 8 14 2 8Z"/></svg></span><span class="name">MONACO</span></span>
+          <span class="mark" title="NODE 22"><span class="glyph"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.15"><path d="M8 2 14 5v6l-6 3-6-3V5Z"/></svg></span><span class="name">NODE 22</span></span>
+          <span class="mark" title="PTY"><span class="glyph"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.15"><rect x="2" y="3" width="12" height="10" rx="1"/><path d="m4 6 2 2-2 2M8 10h3"/></svg></span><span class="name">PTY</span></span>
+          <span class="mark" title="SASS"><span class="glyph"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.15"><path d="M12 3c-4 1-6 4-6 6 0 3 4 3 4 5M4 10c3-3 7-3 8 0"/></svg></span><span class="name">SASS</span></span>
+          <span class="mark" title="ELECTRON"><span class="glyph"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.15"><circle cx="8" cy="8" r="2"/><ellipse cx="8" cy="8" rx="7" ry="3" transform="rotate(45 8 8)"/></svg></span><span class="name">ELECTRON</span></span>
+          <span class="mark" title="GIT"><span class="glyph"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.15"><circle cx="5" cy="4" r="1.5"/><circle cx="11" cy="12" r="1.5"/><circle cx="5" cy="12" r="1.5"/><path d="M5 5.5v5M11 10.5V8a3 3 0 0 0-3-3H5"/></svg></span><span class="name">GIT</span></span>
+        </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+</main>
 
-  <footer class="site-footer">
-    <a class="brand" href="#main">Vela</a>
-    <nav aria-label="Footer navigation">
-      <a href="https://github.com/Tsohnle95/vela" target="_blank" rel="noopener">GitHub ↗</a>
-      <a href="https://github.com/Tsohnle95/vela#setup" target="_blank" rel="noopener">Setup guide ↗</a>
-    </nav>
-  </footer>
+
+<script src="js/field.js"></script>
+<script src="js/vela.js"></script>
+<script src="js/site.js"></script>
 </body>
 </html>
