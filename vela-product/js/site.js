@@ -68,4 +68,27 @@
       });
     });
   }
+  // Explorer hover preview
+  var explorer = document.querySelector('.rail button[data-label="Explorer"]');
+  var workspacePreview = document.getElementById('workspacePreview');
+  if (explorer && workspacePreview) {
+    var showWorkspace = function () {
+      workspacePreview.classList.add('show');
+      workspacePreview.setAttribute('aria-hidden', 'false');
+      explorer.classList.add('is-previewing');
+    };
+    var hideWorkspace = function () {
+      workspacePreview.classList.remove('show');
+      workspacePreview.setAttribute('aria-hidden', 'true');
+      explorer.classList.remove('is-previewing');
+    };
+    explorer.addEventListener('pointerenter', showWorkspace);
+    explorer.addEventListener('pointerleave', hideWorkspace);
+    explorer.addEventListener('focus', showWorkspace);
+    explorer.addEventListener('blur', hideWorkspace);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') hideWorkspace();
+    });
+  }
+
 })();

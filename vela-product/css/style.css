@@ -112,7 +112,7 @@ h1 .dot{color:var(--fg)}
 .rail button:hover .n,.rail button.on .n{color:#8f8f8f}
 .rail button::after{
   content:attr(data-label);position:absolute;left:64px;top:50%;transform:translateY(-50%);
-  padding:5px 8px;border:1px solid rgba(255,255,255,.14);background:rgba(5,5,5,.92);
+  padding:5px 8px;border:0;background:rgba(5,5,5,.92);
   font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:#d8d8d8;
   white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s;
 }
@@ -211,3 +211,11 @@ h1,.sub{text-shadow:0 2px 24px rgba(0,0,0,.7),0 1px 4px rgba(0,0,0,.55)}
 .skip:focus{top:15px}
 a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 
+
+
+/* Explorer hover workspace preview */
+.workspace-preview{position:fixed;inset:0;z-index:4;display:flex;align-items:center;justify-content:center;padding:clamp(58px,8vh,90px) clamp(16px,6vw,90px);background:#000;opacity:0;visibility:hidden;transition:opacity .22s ease,visibility .22s;pointer-events:none;isolation:isolate}
+.workspace-preview.show{opacity:1;visibility:visible}
+.workspace-preview img{display:block;max-width:min(1240px,100%);max-height:100%;width:auto;height:auto;border:0;border-radius:22px;box-shadow:0 30px 120px rgba(0,0,0,.8);background:#000}
+.rail button.is-previewing{color:var(--accent);background:rgba(255,255,255,.035)}
+@media(max-width:900px){.workspace-preview{padding:70px 16px 22px}.workspace-preview img{max-height:calc(100svh - 100px);border-radius:12px}}
