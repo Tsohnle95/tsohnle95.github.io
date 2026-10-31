@@ -93,41 +93,47 @@ h1 .dot{color:var(--fg)}
 .footer .fright{color:#5e5e5e}
 .footer .fmid{color:#4f4f4f}
 
-/* ---------- rail ---------- */
+/* ---------- rail · peek ---------- */
 .rail{
   position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:6;
-  width:62px;display:flex;flex-direction:column;
-  border:1px solid rgba(255,255,255,.1);border-left:0;
-  background:rgba(0,0,0,.42);backdrop-filter:blur(12px);
+  width:14px;display:flex;flex-direction:column;
+  border:1px solid rgba(255,255,255,.12);border-left:0;border-radius:0 9px 9px 0;
+  background:rgba(0,0,0,.5);backdrop-filter:blur(12px);
+  overflow:hidden;
+  transition:width .28s cubic-bezier(.2,.8,.2,1),background .2s;
 }
+.rail:hover,.rail:focus-within{width:132px;background:rgba(0,0,0,.68)}
 .rail button{
-  position:relative;width:100%;height:56px;display:grid;place-items:center;
-  border-bottom:1px solid rgba(255,255,255,.09);color:#5e5e5e;
+  position:relative;width:132px;height:44px;flex:none;display:block;
+  color:#5e5e5e;background:none;border:0;cursor:pointer;
   transition:color .18s,background .18s;
 }
-.rail button:last-child{border-bottom:0}
-.rail button:hover,.rail button.on{color:var(--accent);background:rgba(255,255,255,.035)}
-.rail svg{width:18px;height:18px;display:block}
-.rail .n{position:absolute;top:5px;right:6px;font-family:var(--mono);font-size:6px;letter-spacing:.05em;color:#3f3f3f}
-.rail button:hover .n,.rail button.on .n{color:#8f8f8f}
-.rail button::after{
-  content:attr(data-label);position:absolute;left:64px;top:50%;transform:translateY(-50%);
-  padding:5px 8px;border:0;background:rgba(5,5,5,.92);
-  font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:#d8d8d8;
-  white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s;
+.rail button:focus-visible{outline:1px solid var(--accent);outline-offset:-3px}
+.rail button svg{
+  position:absolute;left:20px;top:50%;width:16px;height:16px;display:block;
+  opacity:0;transform:translateY(-50%) translateX(-4px);
+  transition:opacity .18s .04s,transform .18s .04s;
 }
-.rail button:hover::after{opacity:1}
-
-.rail-right{left:auto;right:0;border-left:1px solid rgba(255,255,255,.1);border-right:0}
-.rail-right button::after{left:auto;right:64px}
-.rail-top{top:72px;left:50%;transform:translateX(-50%);flex-direction:row;width:auto;border:1px solid rgba(255,255,255,.1)}
-.rail-top button{width:54px;height:48px;border-bottom:0;border-right:1px solid rgba(255,255,255,.09)}
-.rail-top button:last-child{border-right:0}
-.rail-top button::after{left:50%;top:56px;transform:translateX(-50%)}
-.rail-bottom{top:auto;bottom:52px;left:50%;transform:translateX(-50%);flex-direction:row;width:auto;border:1px solid rgba(255,255,255,.1)}
-.rail-bottom button{width:54px;height:46px;border-bottom:0;border-right:1px solid rgba(255,255,255,.09)}
-.rail-bottom button:last-child{border-right:0}
-.rail-bottom button::after{left:50%;top:auto;bottom:54px;transform:translateX(-50%)}
+.rail .n{display:none}
+.rail button::before{
+  content:"";position:absolute;left:5px;top:50%;width:4px;height:4px;border-radius:1px;
+  background:#3f3f3f;transform:translateY(-50%);
+  transition:opacity .15s,background .15s;
+}
+.rail button.on::before{background:var(--accent);box-shadow:0 0 8px rgba(255,69,214,.5)}
+.rail:hover button svg,.rail:focus-within button svg{opacity:1;transform:translateY(-50%)}
+.rail:hover button::before,.rail:focus-within button::before{opacity:0}
+.rail button::after{
+  content:attr(data-label);position:absolute;left:42px;top:50%;
+  transform:translateY(-50%) translateX(-4px);
+  font-family:var(--mono);font-size:8px;font-weight:500;letter-spacing:.13em;
+  text-transform:uppercase;color:#cfcfcf;white-space:nowrap;
+  opacity:0;pointer-events:none;
+  transition:opacity .18s .04s,transform .18s .04s;
+}
+.rail:hover button::after,.rail:focus-within button::after{opacity:1;transform:translateY(-50%)}
+.rail button:hover,.rail button.on{color:var(--accent);background:rgba(255,255,255,.045)}
+.rail button:hover::after{color:#fff}
 
 /* ---------- layout variants ---------- */
 .layout-center .hero{justify-content:center;text-align:center;padding-left:0;padding-right:0}
@@ -213,7 +219,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 
 
 
-/* Explorer hover workspace preview */
+/* Panel hover workspace preview */
 .workspace-preview{position:fixed;inset:0;z-index:4;display:flex;align-items:center;justify-content:center;padding:clamp(58px,8vh,90px) clamp(16px,6vw,90px);background:#000;opacity:0;visibility:hidden;transition:opacity .22s ease,visibility .22s;pointer-events:none;isolation:isolate}
 .workspace-preview.show{opacity:1;visibility:visible}
 .workspace-preview img{display:block;max-width:min(1240px,100%);max-height:100%;width:auto;height:auto;border:0;border-radius:22px;box-shadow:0 30px 120px rgba(0,0,0,.8);background:#000}

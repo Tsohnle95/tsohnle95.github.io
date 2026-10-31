@@ -68,26 +68,42 @@
       });
     });
   }
-  // Explorer hover preview
-  var explorer = document.querySelector('.rail button[data-label="Explorer"]');
+  // Rail hover preview — every panel previews the workspace. Swap the image
+  // per button here when dedicated panel screenshots are available.
+  var rail = document.querySelector('.rail');
   var workspacePreview = document.getElementById('workspacePreview');
-  if (explorer && workspacePreview) {
-    var showWorkspace = function () {
+  if (rail && workspacePreview) {
+    var previewButtons = Array.prototype.slice.call(rail.querySelectorAll('button'));
+    var previewHideTimer = null;
+
+    var showWorkspace = function (btn) {
+      window.clearTimeout(previewHideTimer);
       workspacePreview.classList.add('show');
       workspacePreview.setAttribute('aria-hidden', 'false');
-      explorer.classList.add('is-previewing');
+      btn.classList.add('is-previewing');
     };
-    var hideWorkspace = function () {
-      workspacePreview.classList.remove('show');
-      workspacePreview.setAttribute('aria-hidden', 'true');
-      explorer.classList.remove('is-previewing');
+    var hideWorkspace = function (btn) {
+      btn.classList.remove('is-previewing');
+      previewHideTimer = window.setTimeout(function () {
+        workspacePreview.classList.remove('show');
+        workspacePreview.setAttribute('aria-hidden', 'true');
+      }, 70);
     };
-    explorer.addEventListener('pointerenter', showWorkspace);
-    explorer.addEventListener('pointerleave', hideWorkspace);
-    explorer.addEventListener('focus', showWorkspace);
-    explorer.addEventListener('blur', hideWorkspace);
+
+    previewButtons.forEach(function (btn) {
+      btn.addEventListener('pointerenter', function () { showWorkspace(btn); });
+      btn.addEventListener('pointerleave', function () { hideWorkspace(btn); });
+      btn.addEventListener('focus', function () { showWorkspace(btn); });
+      btn.addEventListener('blur', function () { hideWorkspace(btn); });
+    });
+
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') hideWorkspace();
+      if (e.key === 'Escape') {
+        window.clearTimeout(previewHideTimer);
+        workspacePreview.classList.remove('show');
+        workspacePreview.setAttribute('aria-hidden', 'true');
+        previewButtons.forEach(function (btn) { btn.classList.remove('is-previewing'); });
+      }
     });
   }
 
